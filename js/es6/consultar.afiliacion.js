@@ -17,21 +17,83 @@ function Buscar(id) {
     var check = parseInt($("#r3:checked").val());
     if(check == 0) {
         
-            ObjMilitar = new Militar();
-            var url = Conn.URL + "militar/crud/" + $("#_cedula").val();
-            CargarAPI(url, "GET", "", ObjMilitar);
-
+        ObjMilitar = new Militar();
+        var url = Conn.URL + "militar/crud/" + $("#_cedula").val();
+        CargarAPI(url, "GET", "", ObjMilitar);
+        $("#_cargando").hide();
     }else{
-        
-    }
+        $("#divFullText").html(obtenerTablaResultados());        
+        var t = $('#tblResultado').DataTable(opciones);
+        t.clear().draw();
 
-
-
-
+        var Busqueda = {
+            Frase :  $("#_cedula").val(),
+            Tipo :  parseInt($("#r3:checked").val())
+        }
+        var obj = {};
+        var url = Conn.URL + "militar/listado";
+        var promesa = CargarAPI_II({
+            sURL: url,
+            metodo: 'POST',
+            valores: Busqueda,
+        });
+        var i = 0;
+        promesa.then(function(xhRequest) {
+          var datos = JSON.parse(xhRequest.responseText);
+          if (datos == null) {
+            $("#_cedula").val("");
+            $("#_cargando").hide();
+            return false;
+          }
+          datos.forEach(v => {
+            i++;
+            des = v.descripcion==undefined?"":v.descripcion;
+            dir = v.direccion==undefined?"":v.direccion;
+            fam = v.familiares==undefined?"":v.familiares;
+            t.row.add([
+                i,
+                `<a href="#" onclick="BuscarFullTextID('` + v.cedula + `')">` + v.cedula + `</a>`,
+                v.nombre,
+                des,
+                dir,
+                fam
+            ]).draw(false);
+          });
+          $("#_cargando").hide();
+        });
+    } //Fin del segundo modelo
 
 
 }
 
+function obtenerTablaResultados(){
+    return `
+        <table id="tblResultado" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>CEDULA</th>
+                <th>DATOS PERSONALES</th>
+                <th>DATOS MILITARES</th>
+                <th>DIRECCIONES</th>
+                <th>DETALLES GENERALES</th>                  
+            </tr>
+            </thead>
+
+        </table>
+    `;
+}
+
+function BuscarFullTextID(cedula){
+    $("#_cargando").show();
+    $("#_lblConstanciaPension").hide();
+    $("#_imgfamiliar").attr("src", "images/ndisponible.jpg");
+        
+    ObjMilitar = new Militar();
+    var url = Conn.URL + "militar/crud/" + cedula;
+    CargarAPI(url, "GET", "", ObjMilitar);
+    $("#_cargando").hide();
+}
 function BuscarInsert() {
     Buscar($("#txtcedula").val());
 }
