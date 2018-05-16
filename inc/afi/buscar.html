@@ -3,8 +3,8 @@
         <div class="box-header with-border">
             <center><h3 class="box-title">Consultar Militar Titular</h3></center>
         </div>
-        <div class="box-body" style="padding:50px">
-
+        <div class="box-body" style="padding:10px">
+          <br><br>
           <div class="row row-centered">
           <div class="col-lg-5 col-centered col-md-5 col-xs-8">
 
@@ -21,20 +21,39 @@
           <br><br>
           <div class="form-group">
               <label>
-                <input type="radio" name="r3" class="minimal-red" checked>
-              </label>&nbsp;Cédula&nbsp;&nbsp;&nbsp;&nbsp;
-            <label>
-              <input type="radio" name="r3" class="minimal-red">
-            </label>&nbsp;Datos Militares&nbsp;&nbsp;&nbsp;&nbsp;
-            <label>
-              <input type="radio" name="r3" class="minimal-red">
-            </label>&nbsp;Familiares&nbsp;&nbsp;&nbsp;&nbsp;
-            <label>
-            <input type="radio" name="r3" class="minimal-red">
-            </label>&nbsp;Voy a tener suerte
+                <input type="radio" id="r3" name="r3" class="minimal-red" checked value="0">
+              </label>&nbsp;&nbsp;Cédula&nbsp;&nbsp;&nbsp;&nbsp;
+              <label>
+                <input type="radio" id="r3" name="r3" class="minimal-red"  value="1">
+              </label>&nbsp;&nbsp;Nombres&nbsp;&nbsp;&nbsp;&nbsp;
+              <label>
+                <input type="radio" id="r3" name="r3" class="minimal-red"  value="2">
+              </label>&nbsp;&nbsp;Datos Militares&nbsp;&nbsp;&nbsp;&nbsp;
+              <label>
+                <input type="radio" id="r3" name="r3" class="minimal-red"  value="3">
+              </label>&nbsp;&nbsp;Familiares&nbsp;&nbsp;&nbsp;&nbsp;
+              <label>
+              <input type="radio" id="r3" name="r3" class="minimal-red"  value="4">
+              </label>&nbsp;&nbsp;Voy a tener suerte
           </div>
           </div>
 
+
+        <div>
+            <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>CEDULA</th>
+                  <th>DATOS PERSONALES</th>
+                  <th>DATOS MILITARES</th>
+                  <th>DIRECCIONES</th>
+                  <th>DETALLES GENERALES</th>                  
+                </tr>
+                </thead>
+
+            </table>
+        </div>
         </div><!-- /.box-body -->
 
         <!-- Loading (remove the following to stop the loading)-->

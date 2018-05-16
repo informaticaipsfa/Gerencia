@@ -14,10 +14,18 @@ function Buscar(id) {
     $("#_cargando").show();
     $("#_lblConstanciaPension").hide();
     $("#_imgfamiliar").attr("src", "images/ndisponible.jpg");
+    var check = parseInt($("#r3:checked").val());
+    if(check == 0) {
+        
+            ObjMilitar = new Militar();
+            var url = Conn.URL + "militar/crud/" + $("#_cedula").val();
+            CargarAPI(url, "GET", "", ObjMilitar);
 
-    ObjMilitar = new Militar();
-    var url = Conn.URL + "militar/crud/" + $("#_cedula").val();
-    CargarAPI(url, "GET", "", ObjMilitar);
+    }else{
+        
+    }
+
+
 
 
 
